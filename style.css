@@ -38,6 +38,9 @@ a:hover { color: #555; text-decoration: underline; }
     transform: translateY(-10px);
     transition: opacity .6s ease, transform .6s ease;
 }
+.header-info h1 {
+    margin-top: -3px;
+}
 .cv-header.loaded {
     opacity: 1;
     transform: translateY(0);
@@ -73,6 +76,7 @@ a:hover { color: #555; text-decoration: underline; }
     font-weight: 700;
     letter-spacing: 1px;
     margin-bottom: 4px;
+    line-height: 1.2;
 }
 
 .contact-line {
@@ -213,6 +217,18 @@ a:hover { color: #555; text-decoration: underline; }
 }
 .skills-list li strong { color: #1a1a1a; }
 
+.cv-footer {
+    text-align: center;
+    padding: 16px;
+    font-size: 12px;
+    color: #888;
+}
+.cv-footer a {
+    color: #888;
+}
+.cv-footer a:hover {
+    color: #333;
+}
 
 #print-btn {
     position: fixed;
@@ -277,7 +293,7 @@ a:hover { color: #555; text-decoration: underline; }
 @media print {
     body { background: #fff; color: #000; opacity: 1 !important; animation: none !important; }
     .cv-container { box-shadow: none; margin: 0; padding: 20px 30px; max-width: 100%; }
-    #print-btn, #scroll-top-btn { display: none !important; }
+    #print-btn, #scroll-top-btn, .cv-footer { display: none !important; }
     .cv-section, .cv-header { opacity: 1 !important; transform: none !important; }
     .entry.collapsible .entry-role,
     .entry.collapsible .entry-desc,
