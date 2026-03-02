@@ -1,0 +1,288 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #fff;
+    opacity: 0;
+    animation: fadeIn .8s ease-out .1s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+a { color: #1a1a1a; text-decoration: none; }
+a:hover { color: #555; text-decoration: underline; }
+
+.cv-container {
+    max-width: 780px;
+    margin: 30px auto;
+    padding: 40px 50px;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    border-radius: 4px;
+}
+
+.cv-header {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity .6s ease, transform .6s ease;
+}
+.cv-header.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.header-photo {
+    flex-shrink: 0;
+    width: 120px;
+    height: 140px;
+}
+.header-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.photo-placeholder {
+    display: none;
+    width: 100%; height: 100%;
+    background: #d0d0d0;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #444;
+    letter-spacing: 2px;
+}
+
+.header-info { flex: 1; }
+.header-info h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.contact-line {
+    font-size: 12.5px;
+    color: #444;
+    margin-bottom: 10px;
+    word-break: break-word;
+}
+.contact-line a { color: #444; }
+.contact-line a:hover { color: #555; }
+
+.summary {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.65;
+    text-align: justify;
+}
+
+.cv-section {
+    margin-bottom: 22px;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+.cv-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 5px;
+    border-bottom: 1.5px solid #1a1a1a;
+    margin-bottom: 14px;
+}
+
+.entry {
+    margin-bottom: 16px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: background .25s ease;
+}
+.entry:last-child { margin-bottom: 0; }
+
+.entry.collapsible:hover {
+    background: rgba(0,0,0,.06);
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.entry-title {
+    font-size: 14px;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+.entry-title strong { font-weight: 700; }
+
+.expand-arrow {
+    display: inline-block;
+    font-size: 11px;
+    color: #444;
+    transition: transform .3s ease;
+    flex-shrink: 0;
+}
+.entry.expanded .expand-arrow {
+    transform: rotate(90deg);
+}
+
+.entry-date {
+    font-size: 13px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-weight: 500;
+}
+
+.entry.collapsible .entry-role,
+.entry.collapsible .entry-desc,
+.entry.collapsible ul {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    margin-top: 0;
+    transition: max-height .4s ease, opacity .3s ease, margin-top .3s ease;
+}
+
+.entry.collapsible.expanded .entry-role {
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 2px;
+}
+.entry.collapsible.expanded .entry-desc {
+    max-height: 80px;
+    opacity: 1;
+    margin-top: 2px;
+}
+.entry.collapsible.expanded ul {
+    max-height: 300px;
+    opacity: 1;
+    margin-top: 4px;
+}
+
+.entry-role {
+    font-style: italic;
+    font-size: 13px;
+    color: #444;
+    margin-top: 1px;
+}
+.entry-desc {
+    font-size: 13px;
+    color: #444;
+    margin-top: 1px;
+}
+.entry ul {
+    margin-top: 4px;
+    padding-left: 20px;
+}
+.entry li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 2px;
+    line-height: 1.55;
+}
+
+.skills-list { padding-left: 20px; }
+.skills-list li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 4px;
+    line-height: 1.55;
+}
+.skills-list li strong { color: #1a1a1a; }
+
+
+#print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 20px;
+    background: #f0f0f0;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(0,0,0,.1);
+    transition: background .3s, transform .2s;
+    z-index: 100;
+}
+#print-btn:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+}
+
+#scroll-top-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 42px; height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: #f0f0f0;
+    cursor: pointer;
+    font-size: 18px;
+    color: #1a1a1a;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity .3s, visibility .3s, transform .3s;
+    z-index: 100;
+}
+#scroll-top-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+#scroll-top-btn:hover {
+    background: #e0e0e0;
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .cv-container { margin: 10px; padding: 24px 20px; }
+    .cv-header { flex-direction: column; align-items: center; text-align: center; }
+    .header-photo { width: 100px; height: 120px; }
+    .header-info h1 { font-size: 20px; }
+    .summary { text-align: left; }
+    .entry-header { flex-direction: column; gap: 2px; }
+    .entry-date { font-size: 12px; }
+    #print-btn { top: auto; bottom: 80px; }
+}
+
+@media print {
+    body { background: #fff; color: #000; opacity: 1 !important; animation: none !important; }
+    .cv-container { box-shadow: none; margin: 0; padding: 20px 30px; max-width: 100%; }
+    #print-btn, #scroll-top-btn { display: none !important; }
+    .cv-section, .cv-header { opacity: 1 !important; transform: none !important; }
+    .entry.collapsible .entry-role,
+    .entry.collapsible .entry-desc,
+    .entry.collapsible ul { max-height: none !important; opacity: 1 !important; overflow: visible !important; margin-top: 2px !important; }
+    .expand-arrow { display: none !important; }
+    a { color: #000; }
+    .section-title { border-bottom-color: #000; }
+}
